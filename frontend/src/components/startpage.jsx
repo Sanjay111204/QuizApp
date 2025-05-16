@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import io from "socket.io-client";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-const socket = io("ws://localhost:1112");
+const socket = io("ws://quizrush.onrender.com/");
 
 const startpage = (props) => {
   const [StartTime, setStartTime] = useState(30);
