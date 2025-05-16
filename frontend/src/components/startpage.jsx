@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 const socket = io("https://quizrush.onrender.com/");
 
 const startpage = (props) => {
-  const [StartTime, setStartTime] = useState(30);
+  const [StartTime, setStartTime] = useState(0);
   const [players, setplayers] = useState([]);
   const [playerslist, setplayerslist] = useState([]);
   const [question, setquestion] = useState([]);
