@@ -1,0 +1,22 @@
+{
+  "name": "quizrush",
+  "version": "1.0.0",
+  "description": "websocket quiz app",
+  "license": "ISC",
+  "author": "Sanjay",
+  "type": "commonjs",
+  "main": "1112",
+  "scripts": {
+    "dev": "nodemon backend/index.js",
+    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend",
+    "start": "nodemon backend/index.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

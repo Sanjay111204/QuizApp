@@ -1,0 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Cal+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Luxurious+Roman&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cal+Sans&family=Tagesschrift&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cal+Sans&family=Comic+Relief:wght@400;700&family=Tagesschrift&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cal+Sans&family=Comic+Relief:wght@400;700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Tagesschrift&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-logo: "Cal Sans", sans-serif;
+  --font-body: "Montserrat", sans-serif;
+  --color-mainbg: #115b67;
+  --color-logoboard: #488394;
+  --color-list: #639dad;
+}
