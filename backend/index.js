@@ -12,7 +12,7 @@ const __direname = path.resolve();
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://quizrush.onrender.com/",
     methods: ["GET", "POST"],
     credentials: true,
   })
@@ -20,7 +20,7 @@ app.use(
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: "https://quizrush.onrender.com/",
     methods: ["GET", "POST"],
     credentials: true,
   },
