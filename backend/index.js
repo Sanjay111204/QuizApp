@@ -196,6 +196,9 @@ io.on("connection", (socket) => {
           }
         }
         io.to(room).emit("final", winner);
+        delete players[room];
+        delete Timer[room];
+        delete Rooms[room];
         return;
       }
       io.to(room).emit("Sending question", questions[questionindex].question);
