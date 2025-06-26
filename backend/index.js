@@ -247,7 +247,7 @@ io.on("connection", (socket) => {
 });
 
 app.use(express.static(path.join(__direname, "/frontend/dist")));
-app.get("/", (_, res) => {
+app.get("*name", (_, res) => {
   res.sendFile(path.resolve(__direname, "frontend", "dist", "index.html"));
 });
 
