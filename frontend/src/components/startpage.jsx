@@ -452,7 +452,7 @@ const Startpage = (props) => {
           <div className="flex-1 flex flex-col items-center justify-center py-10">
             <div className="text-4xl font-logo text-indigo-600 font-semibold">
               🚀 Quiz starts in{" "}
-              <strong className="bg-red-500">{StartTime}</strong> seconds...
+              <strong className="text-red-500">{StartTime}</strong> seconds...
             </div>
           </div>
           <PlayerSidebar />
