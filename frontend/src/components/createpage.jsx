@@ -1,107 +1,81 @@
-// import React, { useState } from "react";
-// import SP from "./startpage";
-
-// const createpage = (props) => {
-//   const [Check, setCheck] = useState(0);
-//   const handlejoin = () => {
-//     setCheck(Check + 1);
-//   };
-//   if (!Check) {
-//     return (
-//       <div>
-//         <div className="bg-mainbg min-h-screen min-w-screen flex justify-center items-center font-body">
-//           <div className=" rounded-2xl shadow-2xl  ">
-//             <div className="text-2xl bg-logoboard w-xl rounded-2xl ">
-//               <div className="flex justify-center p-5 font-logo">
-//                 <h1 className=" text-white font-logo text-3xl ">QuizRush</h1>
-//               </div>
-//               <div className="bg-amber-50 rounded-b-2xl ">
-//                 <div className="flex justify-center p-7 font-medium ">
-//                   <h1>Real-time quiz with friends!</h1>
-//                 </div>
-//                 <div className="flex justify-center pb-10 font-medium ">
-//                   Name : {props.name}
-//                 </div>
-//                 <div className="flex justify-center pb-10 font-extrabold">
-//                   RoomCode : {props.rc}
-//                 </div>
-//                 <div className="flex justify-center gap-6 pb-15  rounded-2xl">
-//                   <button
-//                     className="bg-logoboard p-2 rounded-md cursor-pointer font-medium text-white"
-//                     onClick={handlejoin}
-//                   >
-//                     Join Room
-//                   </button>
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     );
-//   } else {
-//     return <SP Roomcode={props.rc} name={props.name} />;
-//   }
-// };
-
-// export default createpage;
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SP from "./startpage";
 import { useLocation } from "react-router";
-import { useEffect } from "react";
 
-const Createpage = (props) => {
-  const [check, setCheck] = useState(0);
+const Createpage = () => {
+  const [check, setCheck] = useState(false);
   const [roomCode, setRoomCode] = useState("");
-  const [name, setname] = useState("");
+  const [name, setName] = useState("");
+  const [topic, setTopic] = useState("");
   const loc = useLocation();
+
   useEffect(() => {
     const { a, b } = loc.state || {};
-    a;
-    setRoomCode(b);
-    setname(a);
+    setRoomCode(b || "");
+    setName(a || "");
   }, [loc]);
 
   const handleJoin = () => {
-    setCheck(check + 1);
+    if (!topic) {
+      alert("Please enter a quiz topic.");
+      return;
+    }
+    setCheck(true);
   };
 
   if (!check) {
     return (
-      <div className="bg-gradient-to-br from-slate-100 via-slate-200 to-slate-100 min-h-screen flex justify-center items-center font-sans p-4">
-        <div className="bg-white rounded-3xl shadow-2xl w-full max-w-md p-8 space-y-6">
+      <div className="bg-gradient-to-br from-indigo-50 via-indigo-100 to-indigo-50 min-h-screen flex justify-center items-center p-4 font-sans">
+        <div className="bg-white rounded-3xl shadow-2xl w-full max-w-md p-8 space-y-6 transform transition-all hover:scale-[1.03] duration-300">
+          {/* Heading */}
           <div className="text-center">
-            <h1 className="text-4xl font-extrabold text-indigo-600 mb-2 font-logo">
+            <h1 className="text-4xl font-extrabold text-indigo-600 mb-2 font-logo drop-shadow-md">
               QuizRush
             </h1>
-            <p className="text-gray-700">Real-time quiz with friends!</p>
+            <p className="text-gray-600">Real-time quiz with friends!</p>
           </div>
 
-          <div className="text-center font-medium text-gray-800">
+          {/* Topic Input */}
+          <input
+            type="text"
+            placeholder="Enter Quiz Topic"
+            value={topic}
+            onChange={(e) => setTopic(e.target.value)}
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 placeholder-gray-400 shadow-sm text-center"
+          />
+
+          {/* User Info */}
+          <div className="text-center font-semibold text-gray-700 text-xl">
             <p>
-              Name: <span className="font-semibold">{name}</span>
+              Name: <span className="text-indigo-600">{name}</span>
             </p>
           </div>
 
-          <div className="text-center font-bold text-gray-900">
+          <div className="text-center font-semibold text-gray-900 text-xl">
             <p>
               Room Code: <span className="text-indigo-600">{roomCode}</span>
             </p>
           </div>
 
+          {/* Join Button */}
           <div className="flex justify-center">
             <button
-              className="bg-indigo-500 hover:bg-indigo-600 transition-colors text-white py-3 px-6 rounded-lg font-semibold"
+              className="bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-700 transition-colors text-white py-3 px-6 rounded-lg font-semibold shadow"
               onClick={handleJoin}
             >
-              Join Room
+              Start Quiz
             </button>
+          </div>
+
+          {/* Footer */}
+          <div className="text-center text-gray-400 text-sm mt-2">
+            Prepare your quiz topic and invite friends!
           </div>
         </div>
       </div>
     );
   } else {
-    return <SP Roomcode={roomCode} name={name} />;
+    return <SP Roomcode={roomCode} name={name} topic={topic} />;
   }
 };
 

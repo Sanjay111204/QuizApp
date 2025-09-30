@@ -1,75 +1,16 @@
-// import React from "react";
-// import { useState } from "react";
-// import SP from "./startpage";
-
-// const Joinpage = (props) => {
-//   const [Roomcode, setRoomcode] = useState("");
-//   const [check, setcheck] = useState(0);
-//   function handlejoin() {
-//     if (Roomcode == " ") {
-//       alert("Please enter RoomCode...");
-//       return;
-//     }
-//     setcheck(check + 1);
-//   }
-//   if (!check) {
-//     return (
-//       <div>
-//         <div className="bg-mainbg min-h-screen min-w-screen flex justify-center items-center font-body">
-//           <div className=" rounded-2xl shadow-2xl  ">
-//             <div className="text-2xl bg-logoboard w-xl rounded-2xl ">
-//               <div className="flex justify-center p-5 font-logo">
-//                 <h1 className=" text-white font-logo text-3xl ">QuizRush</h1>
-//               </div>
-//               <div className="bg-amber-50 rounded-b-2xl ">
-//                 <div className="flex justify-center p-7 font-medium ">
-//                   <h1>Real-time quiz with friends!</h1>
-//                 </div>
-//                 <div className="flex justify-center pb-10 font-medium ">
-//                   Name : {props.name}
-//                 </div>
-//                 <div className="flex justify-center pb-10">
-//                   <input
-//                     type="text"
-//                     className="border-gray-400 border-1 rounded-md p-3 text-center"
-//                     placeholder="Enter RoomCode"
-//                     value={Roomcode}
-//                     onChange={(e) => setRoomcode(e.target.value)}
-//                   ></input>
-//                 </div>
-//                 <div className="flex justify-center gap-6 pb-15  rounded-2xl">
-//                   <button
-//                     className="bg-logoboard p-2 rounded-md cursor-pointer font-medium text-white"
-//                     onClick={handlejoin}
-//                   >
-//                     Join Room
-//                   </button>
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     );
-//   } else {
-//     return <SP Roomcode={Roomcode} name={props.name} />;
-//   }
-// };
-
-// export default Joinpage;
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SP from "./startpage";
 import { useLocation } from "react-router";
-import { useEffect } from "react";
 
-const Joinpage = (props) => {
+const Joinpage = () => {
   const [roomCode, setRoomCode] = useState("");
-  const [check, setCheck] = useState(0);
-  const [name, setname] = useState("");
+  const [check, setCheck] = useState(false);
+  const [name, setName] = useState("");
   const loc = useLocation();
+
   useEffect(() => {
     const { a } = loc.state || {};
-    setname(a);
+    setName(a || "");
   }, [loc]);
 
   const handleJoin = () => {
@@ -77,43 +18,52 @@ const Joinpage = (props) => {
       alert("Please enter Room Code...");
       return;
     }
-    setCheck(check + 1);
+    setCheck(true);
   };
 
   if (!check) {
     return (
-      <div className="bg-gradient-to-br from-slate-100 via-slate-200 to-slate-100 min-h-screen flex justify-center items-center font-sans p-4">
-        <div className="bg-white rounded-3xl shadow-2xl w-full max-w-md p-8 space-y-6">
+      <div className="bg-gradient-to-br from-indigo-50 via-indigo-100 to-indigo-50 min-h-screen flex justify-center items-center p-4 font-sans">
+        <div className="bg-white rounded-3xl shadow-2xl w-full max-w-md p-8 space-y-6 transform transition-all hover:scale-[1.03] duration-300">
+          {/* Heading */}
           <div className="text-center">
-            <h1 className="text-4xl font-extrabold text-indigo-600 mb-2 font-logo">
+            <h1 className="text-4xl font-extrabold text-indigo-600 mb-2 font-logo drop-shadow-md">
               QuizRush
             </h1>
-            <p className="text-gray-700">Ready to join a live quiz room?</p>
+            <p className="text-gray-600">Ready to join a live quiz room?</p>
           </div>
 
-          <div className="text-center font-medium text-gray-800">
+          {/* User Info */}
+          <div className="text-center font-bold text-gray-700 text-xl">
             <p>
-              👤 <strong>Name:</strong> {name}
+              Name: <span className="text-indigo-600">{name}</span>
             </p>
           </div>
 
-          <div className="text-center">
+          {/* Room Code Input */}
+          <div>
             <input
               type="text"
-              className="w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-indigo-400 text-center"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 text-center shadow-sm placeholder-gray-400"
               placeholder="Enter Room Code"
               value={roomCode}
               onChange={(e) => setRoomCode(e.target.value)}
             />
           </div>
 
+          {/* Join Button */}
           <div className="flex justify-center">
             <button
-              className="bg-indigo-500 hover:bg-indigo-600 transition-colors text-white py-3 px-6 rounded-lg font-semibold"
+              className="bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-700 transition-colors text-white py-3 px-6 rounded-lg font-semibold shadow"
               onClick={handleJoin}
             >
               Join Room
             </button>
+          </div>
+
+          {/* Footer Note */}
+          <div className="text-center text-gray-400 text-sm mt-2">
+            Make sure you have the correct Room Code from your host.
           </div>
         </div>
       </div>
